@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npm run dev || npm run start:dev || npm start || node server.js"]
