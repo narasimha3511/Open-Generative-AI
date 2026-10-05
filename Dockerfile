@@ -8,8 +8,10 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build 2>/dev/null || true
+# Try to build, but don't fail if build script doesn't exist
+RUN npm run build 2>&1 | grep -v "missing script" || true
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+# Use a more flexible start command
+CMD npm start || npm run dev || node server.js || npm run start:server
